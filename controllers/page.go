@@ -3,7 +3,7 @@ package controllers
 import (
 	"fmt"
 
-	"github.com/NekoWheel/NekoBox/models"
+	"github.com/miriko-channel/NekoBox/models"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
 	"github.com/jinzhu/gorm"

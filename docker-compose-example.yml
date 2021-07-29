@@ -1,0 +1,30 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=box
+      - MYSQL_USER=neko
+      - MYSQL_PASSWORD=password
+      - TZ=Asia/Shanghai
+  
+  nekobox:
+    image: lonelyion/nekobox:latest
+    depends_on: 
+      - db
+    volumes:
+      - ./conf:/home/app/conf
+      - /etc/localtime:/etc/localtime
+    restart: unless-stopped
+    links:
+      - "db:database"
+    ports:
+      - "3997:8080"
+    environment:
+      - TZ=Asia/Shanghai
+    

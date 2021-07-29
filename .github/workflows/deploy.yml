@@ -24,7 +24,7 @@ jobs:
           go mod tidy
       - name: Build
         run: |
-          CGO_ENABLED=0 go build -v -ldflags "-w -s -extldflags '-static' -X 'github.com/NekoWheel/NekoBox/routers.COMMIT_SHA=$GITHUB_SHA'" -o NekoBox .
+          CGO_ENABLED=0 go build -v -ldflags "-w -s -extldflags '-static' -X 'github.com/miriko-channel/NekoBox/routers.COMMIT_SHA=$GITHUB_SHA'" -o NekoBox .
           pwd
       - name: Archive production artifacts
         uses: actions/upload-artifact@v1
@@ -73,8 +73,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           connect_timeout: 10s
           script: |
-            docker rm -f nekobox || true
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker rmi $DOCKER_NAME || true
-            docker pull $DOCKER_NAME
-            docker run -dt --name nekobox -e TZ=Asia/Shanghai -v /etc/localtime:/etc/localtime -p 127.0.0.1:10000:8080 -v /home/neko/nekobox/conf:/home/app/conf --link mysql:mysql $DOCKER_NAME:latest
+            cd /home/ion/NekoBox && docker-compose up -d

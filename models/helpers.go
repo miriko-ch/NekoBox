@@ -49,7 +49,7 @@ func UploadPicture(header *multipart.FileHeader, file multipart.File) string {
 	fileByte := make([]byte, header.Size)
 	_, _ = file.Read(fileByte)
 	req := gorequest.New().Post(beego.AppConfig.String("upload_url")).Type("multipart")
-	req.Header.Set("token", beego.AppConfig.String("upload_token"))
+	req.Header.Set("Authorization", beego.AppConfig.String("upload_token"))
 	req.SendFile(fileByte, header.Filename, "image")
 	resp, body, _ := req.End()
 
