@@ -27,7 +27,7 @@ func SendNewQuestionMail(pageID uint, question *Question) {
 	var mailContent bytes.Buffer
 	t, _ := template.ParseFiles("views/mail/new_question.tpl")
 	p := map[string]string{
-		"link":     fmt.Sprintf("https://box.n3ko.co/_/%s/%d", page.Domain, question.ID),
+		"link":     fmt.Sprintf("%s/_/%s/%d", beego.AppConfig.String("domain") ,page.Domain, question.ID),
 		"question": question.Content,
 	}
 	_ = t.Execute(&mailContent, p)
@@ -60,7 +60,7 @@ func SendPasswordRecoveryMail(userID uint, email string) error {
 	var mailContent bytes.Buffer
 	t, _ := template.ParseFiles("views/mail/password_recovery.tpl")
 	p := map[string]string{
-		"link":  fmt.Sprintf("https://box.n3ko.co/recoveryPassword?code=%s", code),
+		"link":  fmt.Sprintf("%s/recoveryPassword?code=%s", beego.AppConfig.String("domain"), code),
 		"email": email,
 	}
 	_ = t.Execute(&mailContent, p)
