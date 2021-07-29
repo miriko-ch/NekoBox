@@ -107,6 +107,7 @@ type UploadCallBack struct {
 		DeleteUrl	string 	`json:"delete"`
 		PageUrl		string	`json:"page"`
 	} `json:"data"`
+	ExistedUrl	string 	`json:"images"`
 	RequestId 	string  `json:"RequestId"`
 }
 
