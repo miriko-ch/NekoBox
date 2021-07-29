@@ -9,7 +9,6 @@ import (
 	"github.com/parnurzeal/gorequest"
 	"io"
 	"mime/multipart"
-	"strings"
 )
 
 func AddSalt(raw string) string {
@@ -50,15 +49,17 @@ func UploadPicture(header *multipart.FileHeader, file multipart.File) string {
 	_, _ = file.Read(fileByte)
 	req := gorequest.New().Post(beego.AppConfig.String("upload_url")).Type("multipart")
 	req.Header.Set("Authorization", beego.AppConfig.String("upload_token"))
-	req.SendFile(fileByte, header.Filename, "image")
+	req.SendFile(fileByte, header.Filename, "smfile")
 	resp, body, _ := req.End()
 
 	if resp != nil && resp.StatusCode == 200 {
-		backgroundJSON := new(UploadCallBack)
-		err := json.Unmarshal([]byte(body), &backgroundJSON)
-		if err == nil {
-			return strings.Split(backgroundJSON.Data.URL, "?")[0]
+		responseJson := new(UploadCallBack)
+		err := json.Unmarshal([]byte(body), &responseJson)
+		if err == nil && responseJson.Success {
+			//fmt.Println(time.Now().String() + " : Upload Successful" + responseJson.Data.Url)
+			return responseJson.Data.Url
 		}
+		fmt.Println(err)
 	}
 	return ""
 }
