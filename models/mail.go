@@ -29,6 +29,7 @@ func SendNewQuestionMail(pageID uint, question *Question) {
 	p := map[string]string{
 		"link":     fmt.Sprintf("%s/_/%s/%d", beego.AppConfig.String("domain") ,page.Domain, question.ID),
 		"question": question.Content,
+		"year":	 		fmt.Sprintf("%v",time.Now().Year()),
 	}
 	_ = t.Execute(&mailContent, p)
 
@@ -62,6 +63,7 @@ func SendPasswordRecoveryMail(userID uint, email string) error {
 	p := map[string]string{
 		"link":  fmt.Sprintf("%s/recoveryPassword?code=%s", beego.AppConfig.String("domain"), code),
 		"email": email,
+		"year":	 fmt.Sprintf("%v",time.Now().Year()),
 	}
 	_ = t.Execute(&mailContent, p)
 
