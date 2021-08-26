@@ -91,19 +91,24 @@ type AnswerForm struct {
 }
 
 type UploadCallBack struct {
-	Code int `json:"code"`
+	Success 		bool 		`json:"success"`
+	Code 				string 	`json:"code"`
+	Message  		string 	`json:"message"`
 	Data struct {
-		Md5      string `json:"md5"`
-		Mime     string `json:"mime"`
-		Name     string `json:"name"`
-		Quota    string `json:"quota"`
-		Sha1     string `json:"sha1"`
-		Size     int    `json:"size"`
-		URL      string `json:"url"`
-		UseQuota string `json:"use_quota"`
+		FileID		int 		`json:"file_id"`
+		Width			int 		`json:"width"`
+		Height		int 		`json:"height"`
+		FileName	string 	`json:"filename"`
+		StoreName	string 	`json:"storename"`
+		Size			int			`json:"size"`
+		Path			string 	`json:"path"`
+		Hash     	string 	`json:"hash"`
+		Url				string 	`json:"url"`
+		DeleteUrl	string 	`json:"delete"`
+		PageUrl		string	`json:"page"`
 	} `json:"data"`
-	Msg  string `json:"msg"`
-	Time int    `json:"time"`
+	ExistedUrl	string 	`json:"images"`
+	RequestId 	string  `json:"RequestId"`
 }
 
 type RecaptchaResponse struct {

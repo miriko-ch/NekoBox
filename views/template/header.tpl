@@ -18,6 +18,15 @@
             visibility: hidden;
         }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103626808-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-103626808-1');
+    </script>
+
 </head>
 <body>
 <nav class="uk-navbar-container uk-margin" uk-navbar>
